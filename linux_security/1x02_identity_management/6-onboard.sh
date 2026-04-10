@@ -1,0 +1,2 @@
+#!/bin/bash
+user="$1"; key="$2"; id "$user" >/dev/null 2>&1 || (useradd -m -s /bin/bash "$user" && passwd -l "$user" >/dev/null); homedir=$(getent passwd "$user" | cut -d: -f6); sshdir="$homedir/.ssh"; mkdir -p "$sshdir"; chown -R "$user:$user" "$sshdir"; chmod 700 "$sshdir"; authkey="$homedir/.ssh/authorized_keys"; printf '%s\n' "$key" > "$authkey"; chown "$user:$user" "$authkey"; chmod 600 "$authkey"

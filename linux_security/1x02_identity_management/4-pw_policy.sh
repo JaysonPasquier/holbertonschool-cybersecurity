@@ -1,0 +1,2 @@
+#!/bin/bash
+pkg="${1:-libpam-pwquality}"; pamconf="${2:-/etc/pam.d/common-password}"; dpkg -s "$pkg" >/dev/null 2>&1 || (apt-get update && apt-get install -y $1) && grep -q '^password.pam_pwquality\.so' "$pamconf" && sed -i 's/^password.pam_pwquality\.so.*/password requisite pam_pwquality.so retry=3 minlen=12 minclass=3/' "$pamconf" || echo "password requisite pam_pwquality.so retry=3 minlen=12 minclass=3" >> "$pamconf"
