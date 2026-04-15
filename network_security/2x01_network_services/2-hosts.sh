@@ -1,2 +1,2 @@
 #!/bin/bash
-awk '/(^|[[:space:]])localhost($|[[:space:]])/ {print $1; exit}' /etc/hosts
+awk '/(^|[[:space:]])localhost($|[[:space:]])/ {printf "%s", $1; exit}' /etc/hosts
