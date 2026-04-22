@@ -1,1 +1,1 @@
-port 80
+host and port 80
